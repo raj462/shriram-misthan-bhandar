@@ -1,105 +1,2826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ============================================================
+       PAGE SETTINGS
+       This section controls the browser settings, SEO information,
+       page title, responsive layout and Tailwind CSS.
+       ============================================================ -->
+
   <meta charset="UTF-8">
+
+  <!-- Makes the website responsive on mobile phones and tablets. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shriram Misthan Bhandar - Fresh sweets, snacks and delicious treats in Gwalior.">
-  <title>Shriram Misthan Bhandar | Gwalior</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- SEO description shown by search engines. -->
+  <meta name="description"
+        content="Shriram Mishtan Bhandar - Happiness in every box. Traditional Indian sweets, namkeen, snacks and restaurant food in Gwalior.">
+
+  <!-- Website title shown in the browser tab. -->
+  <title>Shriram Mishtan Bhandar | Happiness in Every Box</title>
+
+  <!-- ============================================================
+       TAILWIND CSS
+       Tailwind is loaded from CDN, so no installation is required.
+       ============================================================ -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================================
+       TAILWIND BRAND COLORS
+       Change these HEX values if you want different colors.
+       ============================================================ -->
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: "#8F1027",
+              darkRed: "#5D0A18",
+              gold: "#D4A72C",
+              lightGold: "#F3D98A",
+              cream: "#FFF9EC",
+              brown: "#32180F"
+            }
+          },
+
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "Arial", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- ============================================================
+       GOOGLE FONTS
+       Gives the website a premium Indian luxury appearance.
+       ============================================================ -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- ============================================================
+       CUSTOM CSS
+       Additional styling, animations and glassmorphism effects.
+       ============================================================ -->
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #FFF9EC;
+      color: #32180F;
+    }
+
+    .font-display {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    /* Glassmorphism card effect. */
+    .glass {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,.8);
+    }
+
+    /* Decorative Indian-style background pattern. */
+    .royal-pattern {
+      background-image:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(212,167,44,.13) 0 2px,
+          transparent 3px
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(143,16,39,.08) 0 2px,
+          transparent 3px
+        );
+
+      background-size: 28px 28px, 36px 36px;
+    }
+
+    /* Gold decorative line. */
+    .gold-line {
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #D4A72C,
+        transparent
+      );
+    }
+
+    /* Hero background lighting. */
+    .hero-glow {
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(243,217,138,.35),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(143,16,39,.12),
+          transparent 30%
+        );
+    }
+
+    /* Scroll reveal animation. */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition:
+        opacity .7s ease,
+        transform .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Floating animation for hero image. */
+    .floating {
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Button shine animation. */
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        transparent
+      );
+      transform: skewX(-20deg);
+      transition: left .7s ease;
+    }
+
+    .shine:hover::after {
+      left: 150%;
+    }
+
+  </style>
 </head>
+
 <body>
-  <header class="hero">
-    <nav class="nav container">
-      <a class="brand" href="#home">Shriram Misthan Bhandar</a>
-      <a class="nav-btn" href="#contact">Contact</a>
-    </nav>
-    <div class="hero-content container" id="home">
-      <div class="hero-copy">
-        <span class="eyebrow">Fresh • Traditional • Delicious</span>
-        <h1>Sweet moments,<br><span>made memorable.</span></h1>
-        <p>Welcome to Shriram Misthan Bhandar — your destination for delicious sweets, snacks and festive treats in Gwalior.</p>
-        <div class="actions">
-          <a class="btn primary" href="tel:+919713275098">☎ Call Now</a>
-          <a class="btn whatsapp" href="https://wa.me/919713275098" target="_blank" rel="noopener">WhatsApp</a>
+
+  <!-- ============================================================
+       NAVBAR SECTION
+       Purpose:
+       Provides website navigation and stays fixed at the top.
+       ============================================================ -->
+
+  <header class="fixed top-0 left-0 right-0 z-50">
+
+    <!-- Main navigation bar. -->
+    <nav class="glass shadow-lg border-b border-brand-gold/20">
+
+      <!-- Navigation content container. -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+                  h-20 flex items-center justify-between">
+
+        <!-- ========================================================
+             BUSINESS LOGO
+             Replace the image URL with your own logo if required.
+             ======================================================== -->
+
+        <a href="#home"
+           class="flex items-center gap-3">
+
+          <!-- Navbar logo:
+               This image represents Shriram Mishtan Bhandar.
+               Replace the image URL with another logo if required. -->
+
+          <img
+            src="https://dummyimage.com/120x120/ffffff/8f1027.png&text=SMB"
+            alt="Shriram Mishtan Bhandar logo"
+            class="h-14 w-14 object-contain rounded-full">
+
+          <!-- Business name beside logo. -->
+          <div class="hidden sm:block">
+
+            <!-- Business name. -->
+            <div class="font-display font-bold text-brand-red text-lg">
+              Shriram Mishtan
+            </div>
+
+            <!-- Brand heritage. -->
+            <div class="text-xs font-bold tracking-widest text-brand-brown">
+              BHANDAR • SINCE 1986
+            </div>
+
+          </div>
+
+        </a>
+
+        <!-- ========================================================
+             DESKTOP NAVIGATION MENU
+             ======================================================== -->
+
+        <div class="hidden lg:flex items-center gap-7">
+
+          <!-- Home navigation link. -->
+          <a href="#home"
+             class="font-semibold hover:text-brand-red">
+            Home
+          </a>
+
+          <!-- About navigation link. -->
+          <a href="#about"
+             class="font-semibold hover:text-brand-red">
+            About
+          </a>
+
+          <!-- Menu navigation link. -->
+          <a href="#menu"
+             class="font-semibold hover:text-brand-red">
+            Menu
+          </a>
+
+          <!-- Services navigation link. -->
+          <a href="#services"
+             class="font-semibold hover:text-brand-red">
+            Services
+          </a>
+
+          <!-- Reviews navigation link. -->
+          <a href="#reviews"
+             class="font-semibold hover:text-brand-red">
+            Reviews
+          </a>
+
+          <!-- FAQ navigation link. -->
+          <a href="#faq"
+             class="font-semibold hover:text-brand-red">
+            FAQ
+          </a>
+
+          <!-- Contact navigation link. -->
+          <a href="#contact"
+             class="font-semibold hover:text-brand-red">
+            Contact
+          </a>
+
         </div>
+
+        <!-- ========================================================
+             WHATSAPP ORDER BUTTON
+             ======================================================== -->
+
+        <a
+          href="https://wa.me/919713275098?text=Hello%20Shriram%20Mishtan%20Bhandar%2C%20I%20want%20to%20place%20an%20order."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center gap-2
+                 rounded-full bg-brand-red px-5 py-3
+                 text-sm font-bold text-white
+                 hover:bg-brand-darkRed transition">
+
+          💬 Order on WhatsApp
+
+        </a>
+
+        <!-- Mobile menu button. -->
+        <button
+          id="mobileMenuButton"
+          class="lg:hidden rounded-xl border
+                 border-brand-red/20 bg-white px-3 py-2
+                 text-brand-red"
+          aria-label="Open menu">
+
+          ☰
+
+        </button>
+
       </div>
-      <div class="hero-card">
-        <div class="sweet-orb">SMB</div>
-        <p>Made with care</p>
-        <strong>For every celebration</strong>
+
+      <!-- ========================================================
+           MOBILE NAVIGATION MENU
+           Hidden on mobile until menu button is clicked.
+           ======================================================== -->
+
+      <div
+        id="mobileMenu"
+        class="hidden lg:hidden bg-white border-t
+               border-brand-gold/20 p-5">
+
+        <!-- Mobile Home link. -->
+        <a href="#home"
+           class="block py-2 font-semibold">
+          Home
+        </a>
+
+        <!-- Mobile About link. -->
+        <a href="#about"
+           class="block py-2 font-semibold">
+          About
+        </a>
+
+        <!-- Mobile Menu link. -->
+        <a href="#menu"
+           class="block py-2 font-semibold">
+          Menu
+        </a>
+
+        <!-- Mobile Services link. -->
+        <a href="#services"
+           class="block py-2 font-semibold">
+          Services
+        </a>
+
+        <!-- Mobile Reviews link. -->
+        <a href="#reviews"
+           class="block py-2 font-semibold">
+          Reviews
+        </a>
+
+        <!-- Mobile FAQ link. -->
+        <a href="#faq"
+           class="block py-2 font-semibold">
+          FAQ
+        </a>
+
+        <!-- Mobile Contact link. -->
+        <a href="#contact"
+           class="block py-2 font-semibold">
+          Contact
+        </a>
+
       </div>
-    </div>
+
+    </nav>
+
   </header>
 
+
+  <!-- ============================================================
+       HERO SECTION
+       Purpose:
+       Creates the first impression and highlights the brand.
+       ============================================================ -->
+
   <main>
-    <section class="section" id="products">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Our favourites</span>
-          <h2>Popular Products</h2>
-          <p>A showcase for your best-selling sweets and snacks. Replace these cards with your full menu later.</p>
+
+    <section
+      id="home"
+      class="min-h-screen pt-28 hero-glow royal-pattern">
+
+      <!-- Hero content container. -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+               min-h-[calc(100vh-7rem)]
+               grid lg:grid-cols-2 gap-10
+               items-center py-12">
+
+        <!-- Hero text content. -->
+        <div class="reveal">
+
+          <!-- Heritage badge. -->
+          <div
+            class="inline-flex items-center gap-2
+                   rounded-full border border-brand-gold/30
+                   bg-white px-4 py-2
+                   text-xs font-bold uppercase
+                   tracking-widest text-brand-red">
+
+            <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+
+            Since 1986 • Gwalior
+
+          </div>
+
+          <!-- Main hero heading. -->
+          <h1
+            class="mt-6 font-display
+                   text-5xl sm:text-6xl lg:text-7xl
+                   font-extrabold leading-tight">
+
+            Happiness
+
+            <span class="block text-brand-red">
+              in every box.
+            </span>
+
+          </h1>
+
+          <!-- Hero description. -->
+          <p
+            class="mt-6 max-w-xl
+                   text-lg leading-8
+                   text-brand-brown/70">
+
+            Traditional Indian mithai, fresh namkeen
+            and delicious hot snacks — made to bring
+            families together, one bite at a time.
+
+          </p>
+
+          <!-- Hero buttons. -->
+          <div class="mt-8 flex flex-wrap gap-3">
+
+            <!-- WhatsApp ordering button. -->
+            <a
+              href="https://wa.me/919713275098?text=Hello%20Shriram%20Mishtan%20Bhandar%2C%20I%20want%20to%20place%20an%20order."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shine rounded-full bg-brand-red
+                     px-7 py-4 font-bold text-white
+                     shadow-xl hover:bg-brand-darkRed
+                     transition">
+
+              🛍️ Order Fresh Mithai
+
+            </a>
+
+            <!-- Menu button. -->
+            <a
+              href="#menu"
+              class="rounded-full border-2
+                     border-brand-red/20
+                     bg-white px-7 py-4
+                     font-bold text-brand-red
+                     hover:border-brand-gold
+                     transition">
+
+              Explore Menu ↓
+
+            </a>
+
+          </div>
+
+          <!-- Trust points. -->
+          <div class="mt-10 grid grid-cols-3 gap-3 max-w-lg">
+
+            <!-- Fresh daily card. -->
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl">🥛</div>
+              <p class="mt-2 text-xs font-bold">
+                Fresh Daily
+              </p>
+            </div>
+
+            <!-- Traditional card. -->
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl">👨‍🍳</div>
+              <p class="mt-2 text-xs font-bold">
+                Traditional
+              </p>
+            </div>
+
+            <!-- Delivery card. -->
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl">🚚</div>
+              <p class="mt-2 text-xs font-bold">
+                Home Delivery
+              </p>
+            </div>
+
+          </div>
+
         </div>
-        <div class="product-grid">
-          <article class="product-card"><div class="product-icon">🍬</div><h3>Traditional Sweets</h3><p>Fresh mithai for everyday treats and celebrations.</p></article>
-          <article class="product-card"><div class="product-icon">🥟</div><h3>Namkeen & Snacks</h3><p>Crispy, savoury favourites for every occasion.</p></article>
-          <article class="product-card"><div class="product-icon">🎂</div><h3>Cakes & Pastries</h3><p>Delicious desserts for birthdays and special moments.</p></article>
-          <article class="product-card"><div class="product-icon">🎁</div><h3>Gift Boxes</h3><p>Beautifully packed treats for family, friends and festivals.</p></article>
+
+
+        <!-- Hero image area. -->
+        <div class="reveal">
+
+          <!-- Hero food image:
+               This image represents Indian sweets.
+               Replace this URL with another royalty-free image URL. -->
+
+          <img
+            src="https://images.unsplash.com/photo-1605196560542-4a1e9f0f7c5d?auto=format&fit=crop&w=1200&q=85"
+            alt="Beautiful assortment of traditional Indian sweets"
+            class="floating w-full rounded-3xl
+                   aspect-square object-cover
+                   shadow-2xl border-4 border-white">
+
         </div>
+
       </div>
+
     </section>
 
-    <section class="section soft" id="gallery">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">A taste of our world</span>
-          <h2>Gallery</h2>
-          <p>Upload your real product and shop photos into the <code>assets</code> folder and replace these placeholders.</p>
+
+    <!-- ============================================================
+         ABOUT US SECTION
+         Purpose:
+         Builds trust by explaining the business story.
+         ============================================================ -->
+
+    <section
+      id="about"
+      class="bg-white py-20 sm:py-24">
+
+      <!-- About section layout. -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+               grid lg:grid-cols-2 gap-12
+               items-center">
+
+        <!-- About image area. -->
+        <div class="reveal">
+
+          <!-- About image:
+               Represents traditional Indian sweets.
+               Replace this URL with another royalty-free image. -->
+
+          <img
+            src="https://images.unsplash.com/photo-1575377427642-087cf684f04d?auto=format&fit=crop&w=1000&q=85"
+            alt="Traditional Indian sweets displayed beautifully"
+            class="w-full aspect-[4/3]
+                   object-cover rounded-3xl shadow-xl">
+
         </div>
-        <div class="gallery">
-          <div class="gallery-item large"><span>Shop Photo</span></div>
-          <div class="gallery-item"><span>Sweets</span></div>
-          <div class="gallery-item"><span>Namkeen</span></div>
-          <div class="gallery-item"><span>Celebration</span></div>
-          <div class="gallery-item large"><span>Special Treats</span></div>
+
+        <!-- About text. -->
+        <div class="reveal">
+
+          <!-- About section label. -->
+          <p
+            class="text-sm font-extrabold
+                   uppercase tracking-widest
+                   text-brand-red">
+
+            Our Story
+
+          </p>
+
+          <!-- About heading. -->
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            A little sweetness
+            goes a long way.
+
+          </h2>
+
+          <!-- Business description. -->
+          <p
+            class="mt-6 leading-8
+                   text-brand-brown/70">
+
+            Shriram Mishtan Bhandar is a popular
+            local sweet shop and casual eatery in
+            Gwalior known for traditional Indian
+            sweets and hot street food snacks.
+
+          </p>
+
+          <!-- Additional description. -->
+          <p
+            class="mt-4 leading-8
+                   text-brand-brown/70">
+
+            From celebration boxes to everyday cravings,
+            our goal is simple: serve comforting flavours,
+            quality ingredients and the kind of taste
+            people love to return for.
+
+          </p>
+
+          <!-- Business statistics. -->
+          <div class="mt-8 grid grid-cols-3 gap-4">
+
+            <!-- Established counter. -->
+            <div class="rounded-2xl bg-brand-cream p-5 text-center">
+              <div
+                class="font-display text-3xl
+                       font-bold text-brand-red counter"
+                data-target="1986">
+
+                0
+
+              </div>
+
+              <p class="text-xs font-semibold">
+                Established
+              </p>
+
+            </div>
+
+            <!-- Freshness counter. -->
+            <div class="rounded-2xl bg-brand-cream p-5 text-center">
+              <div
+                class="font-display text-3xl
+                       font-bold text-brand-red counter"
+                data-target="100">
+
+                0
+
+              </div>
+
+              <p class="text-xs font-semibold">
+                Freshness %
+              </p>
+
+            </div>
+
+            <!-- Branch counter. -->
+            <div class="rounded-2xl bg-brand-cream p-5 text-center">
+              <div
+                class="font-display text-3xl
+                       font-bold text-brand-red counter"
+                data-target="2">
+
+                0
+
+              </div>
+
+              <p class="text-xs font-semibold">
+                Branches
+              </p>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <section class="section" id="contact">
-      <div class="container contact-wrap">
-        <div>
-          <span class="eyebrow">Visit us</span>
-          <h2>Contact & Locations</h2>
-          <p class="lead">Call or WhatsApp us for orders, enquiries and directions.</p>
-          <div class="contact-list">
-            <div><strong>Phone</strong><a href="tel:+919713275098">9713275098</a> · <a href="tel:+919111333081">9111333081</a></div>
-            <div><strong>Branch 1</strong><span>Gole Ka Mandir Rd, Mela Ground, Morar, Gwalior, Madhya Pradesh 474005</span></div>
-            <div><strong>Branch 2</strong><span>RC Complex, opposite Railway Crossing, near Homeguard Office, Gargaj Colony, Bahodapur, Gurunanak Nagar, Gwalior, Madhya Pradesh</span></div>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="tel:+919713275098">Call Branch</a>
-            <a class="btn whatsapp" href="https://wa.me/919713275098" target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
+
+    <!-- ============================================================
+         MENU SECTION
+         Purpose:
+         Displays the main categories available at the business.
+         ============================================================ -->
+
+    <section
+      id="menu"
+      class="py-20 sm:py-24 royal-pattern">
+
+      <!-- Menu container. -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Menu heading. -->
+        <div class="reveal text-center">
+
+          <!-- Menu label. -->
+          <p
+            class="text-sm font-extrabold uppercase
+                   tracking-widest text-brand-red">
+
+            Our Menu
+
+          </p>
+
+          <!-- Menu title. -->
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Made for every mood.
+
+          </h2>
+
+          <!-- Menu description. -->
+          <p
+            class="mt-4 text-brand-brown/65">
+
+            Pick your favourite category
+            and discover something delicious.
+
+          </p>
+
         </div>
-        <div class="map-card">
-          <div class="map-top"><span>📍</span><strong>Find us in Gwalior</strong></div>
+
+
+        <!-- Menu cards grid. -->
+        <div
+          class="mt-12 grid sm:grid-cols-2
+                 lg:grid-cols-3 gap-6">
+
+
+          <!-- ======================================================
+               KAJU SWEETS CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Kaju sweets image:
+                 Represents kaju-based Indian sweets.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+              alt="Premium Indian kaju sweets"
+              class="h-52 w-full object-cover">
+
+            <!-- Kaju sweets content. -->
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Kaju Sweets
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Rich, smooth and celebration-ready
+                cashew delicacies.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               MILK SWEETS CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Milk sweets image:
+                 Represents milk-based Indian sweets.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=900&q=85"
+              alt="Traditional Indian milk sweets"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Milk Sweets
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Classic milk cakes, peda,
+                burfi and comforting favourites.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               TRADITIONAL MITHAI CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Traditional mithai image:
+                 Represents assorted Indian mithai.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1575377427642-087cf684f04d?auto=format&fit=crop&w=900&q=85"
+              alt="Assortment of traditional Indian mithai"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Traditional Mithai
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Beloved Indian flavours prepared
+                for everyday joy and festivals.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               LADDU CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Laddu image:
+                 Represents Indian laddus.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1605196560542-4a1e9f0f7c5d?auto=format&fit=crop&w=900&q=85"
+              alt="Indian laddus"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Laddu
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Soft, fragrant and perfect
+                for sharing.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               NAMKEEN CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Namkeen image:
+                 Represents savoury Indian snacks.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=900&q=85"
+              alt="Crispy Indian namkeen snacks"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Namkeen
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Crunchy, savoury favourites
+                for tea time and anytime.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               SNACKS CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Snacks image:
+                 Represents hot Indian snacks.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
+              alt="Hot Indian street food snacks"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Snacks
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Hot and satisfying bites
+                for quick meals.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               CAKES & DESSERTS CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Cake image:
+                 Represents cakes and desserts.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+              alt="Celebration cake and desserts"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Cakes & Desserts
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Sweet finishes for birthdays,
+                celebrations and special moments.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               THALI & RESTAURANT CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-white
+                   shadow-xl hover:-translate-y-2
+                   transition">
+
+            <!-- Thali image:
+                 Represents Indian restaurant food.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85"
+              alt="Indian vegetarian thali"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Thali & Restaurant
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-brand-brown/65">
+
+                Good food, hearty meals and
+                Indian comfort flavours.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-red">
+
+                Enquire →
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ======================================================
+               GIFT BOX CARD
+               ====================================================== -->
+
+          <article
+            class="reveal overflow-hidden
+                   rounded-3xl bg-brand-red
+                   text-white shadow-xl
+                   hover:-translate-y-2 transition">
+
+            <!-- Gift box image:
+                 Represents festive sweet gifting.
+                 Replace this URL with another royalty-free image. -->
+
+            <img
+              src="https://images.unsplash.com/photo-1575377427642-087cf684f04d?auto=format&fit=crop&w=900&q=85"
+              alt="Festive Indian sweets suitable for gifting"
+              class="h-52 w-full object-cover">
+
+            <div class="p-6">
+
+              <h3
+                class="font-display text-2xl font-bold">
+
+                Gift Boxes
+
+              </h3>
+
+              <p
+                class="mt-2 text-sm
+                       leading-6 text-white/80">
+
+                Make every celebration sweeter
+                with beautiful mithai boxes.
+
+              </p>
+
+              <a
+                href="#contact"
+                class="mt-4 inline-block
+                       font-bold text-brand-lightGold">
+
+                Gift Enquiry →
+
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         SERVICES SECTION
+         Purpose:
+         Shows the main services offered by the business.
+         ============================================================ -->
+
+    <section
+      id="services"
+      class="bg-white py-20 sm:py-24">
+
+      <!-- Services container. -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Services heading. -->
+        <div class="reveal text-center">
+
+          <p
+            class="text-sm font-extrabold uppercase
+                   tracking-widest text-brand-red">
+
+            What We Offer
+
+          </p>
+
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            From our counter to your table.
+
+          </h2>
+
+        </div>
+
+
+        <!-- Services cards. -->
+        <div
+          class="mt-12 grid md:grid-cols-3 gap-6">
+
+          <!-- Home Delivery service. -->
+          <article
+            class="reveal rounded-3xl
+                   bg-brand-cream p-8
+                   border border-brand-gold/20
+                   hover:-translate-y-2
+                   transition">
+
+            <!-- Service icon. -->
+            <div
+              class="h-14 w-14 grid place-items-center
+                     rounded-2xl bg-brand-red
+                     text-2xl text-white">
+
+              🚚
+
+            </div>
+
+            <!-- Service title. -->
+            <h3
+              class="mt-6 font-display
+                     text-2xl font-bold">
+
+              Home Delivery
+
+            </h3>
+
+            <!-- Service description. -->
+            <p
+              class="mt-3 leading-7
+                     text-brand-brown/65">
+
+              Get Free Home Delivery and enjoy
+              your favourites from home.
+
+            </p>
+
+          </article>
+
+
+          <!-- Dine-in service. -->
+          <article
+            class="reveal rounded-3xl
+                   bg-brand-cream p-8
+                   border border-brand-gold/20
+                   hover:-translate-y-2
+                   transition">
+
+            <!-- Service icon. -->
+            <div
+              class="h-14 w-14 grid place-items-center
+                     rounded-2xl bg-brand-red
+                     text-2xl text-white">
+
+              🍽️
+
+            </div>
+
+            <!-- Service title. -->
+            <h3
+              class="mt-6 font-display
+                     text-2xl font-bold">
+
+              Dine In
+
+            </h3>
+
+            <!-- Service description. -->
+            <p
+              class="mt-3 leading-7
+                     text-brand-brown/65">
+
+              Good Food, welcoming service
+              and satisfying Indian meals.
+
+            </p>
+
+          </article>
+
+
+          <!-- Parcel service. -->
+          <article
+            class="reveal rounded-3xl
+                   bg-brand-cream p-8
+                   border border-brand-gold/20
+                   hover:-translate-y-2
+                   transition">
+
+            <!-- Service icon. -->
+            <div
+              class="h-14 w-14 grid place-items-center
+                     rounded-2xl bg-brand-red
+                     text-2xl text-white">
+
+              📦
+
+            </div>
+
+            <!-- Service title. -->
+            <h3
+              class="mt-6 font-display
+                     text-2xl font-bold">
+
+              Parcel
+
+            </h3>
+
+            <!-- Service description. -->
+            <p
+              class="mt-3 leading-7
+                     text-brand-brown/65">
+
+              Packaging also available for
+              takeaway and gifting.
+
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         WHY CHOOSE US SECTION
+         Purpose:
+         Shows reasons customers should choose Shriram.
+         ============================================================ -->
+
+    <section
+      class="bg-brand-red py-20
+             sm:py-24 text-white">
+
+      <!-- Why choose us layout. -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+               grid lg:grid-cols-2 gap-12
+               items-center">
+
+        <!-- Why choose us image. -->
+        <div class="reveal">
+
+          <!-- Why Choose Us image:
+               Represents fresh Indian sweets.
+               Replace this URL with another royalty-free image. -->
+
+          <img
+            src="https://images.unsplash.com/photo-1605196560542-4a1e9f0f7c5d?auto=format&fit=crop&w=1100&q=85"
+            alt="Assorted traditional Indian sweets"
+            class="w-full aspect-[4/3]
+                   object-cover rounded-3xl">
+
+        </div>
+
+
+        <!-- Why choose us content. -->
+        <div class="reveal">
+
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-lightGold">
+
+            Why Shriram
+
+          </p>
+
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Tradition you can taste.
+
+          </h2>
+
+          <p
+            class="mt-5 leading-8 text-white/75">
+
+            We combine the warmth of a local
+            mithai shop with the convenience
+            today's customers expect.
+
+          </p>
+
+
+          <!-- Benefits grid. -->
+          <div
+            class="mt-8 grid sm:grid-cols-2 gap-4">
+
+            <!-- Benefit card. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <div class="text-2xl">✨</div>
+
+              <h3 class="mt-3 font-bold">
+                Fresh Preparation
+              </h3>
+
+              <p class="mt-1 text-sm text-white/65">
+                Made with care for better taste.
+              </p>
+
+            </div>
+
+
+            <!-- Benefit card. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <div class="text-2xl">🇮🇳</div>
+
+              <h3 class="mt-3 font-bold">
+                Indian Tradition
+              </h3>
+
+              <p class="mt-1 text-sm text-white/65">
+                Familiar recipes and flavours.
+              </p>
+
+            </div>
+
+
+            <!-- Benefit card. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <div class="text-2xl">🎁</div>
+
+              <h3 class="mt-3 font-bold">
+                Gift Ready
+              </h3>
+
+              <p class="mt-1 text-sm text-white/65">
+                Packaging for celebrations.
+              </p>
+
+            </div>
+
+
+            <!-- Benefit card. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <div class="text-2xl">❤️</div>
+
+              <h3 class="mt-3 font-bold">
+                Made for Families
+              </h3>
+
+              <p class="mt-1 text-sm text-white/65">
+                Food that brings people together.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         TESTIMONIALS SECTION
+         Purpose:
+         Shows customer feedback and builds trust.
+         ============================================================ -->
+
+    <section
+      id="reviews"
+      class="bg-brand-cream py-20">
+
+      <!-- Testimonials container. -->
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Testimonials heading. -->
+        <div class="reveal text-center">
+
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-red">
+
+            Customer Love
+
+          </p>
+
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Taste that keeps people talking.
+
+          </h2>
+
+        </div>
+
+
+        <!-- Testimonial cards. -->
+        <div
+          class="mt-12 grid md:grid-cols-2 gap-6">
+
+          <!-- Raaz testimonial. -->
+          <article
+            class="reveal rounded-3xl
+                   bg-white p-8 shadow-xl">
+
+            <!-- Star rating. -->
+            <div class="text-brand-gold text-xl">
+              ★★★★★
+            </div>
+
+            <!-- Review text. -->
+            <blockquote
+              class="mt-5 font-display
+                     text-2xl leading-9">
+
+              “Very good taste.”
+
+            </blockquote>
+
+            <!-- Customer name. -->
+            <p class="mt-5 font-bold text-brand-red">
+              — Raaz
+            </p>
+
+          </article>
+
+
+          <!-- Arun testimonial. -->
+          <article
+            class="reveal rounded-3xl
+                   bg-white p-8 shadow-xl">
+
+            <!-- Star rating. -->
+            <div class="text-brand-gold text-xl">
+              ★★★★★
+            </div>
+
+            <!-- Review text. -->
+            <blockquote
+              class="mt-5 font-display
+                     text-2xl leading-9">
+
+              “Good taste.”
+
+            </blockquote>
+
+            <!-- Customer name. -->
+            <p class="mt-5 font-bold text-brand-red">
+              — Arun
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         FAQ SECTION
+         Purpose:
+         Answers common customer questions.
+         ============================================================ -->
+
+    <section
+      id="faq"
+      class="bg-white py-20">
+
+      <!-- FAQ container. -->
+      <div
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- FAQ heading. -->
+        <div class="reveal text-center">
+
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-red">
+
+            FAQ
+
+          </p>
+
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Questions, answered.
+
+          </h2>
+
+        </div>
+
+
+        <!-- FAQ list. -->
+        <div class="mt-10 space-y-4">
+
+
+          <!-- FAQ item 1. -->
+          <div
+            class="reveal rounded-2xl
+                   border border-brand-gold/20
+                   bg-brand-cream overflow-hidden">
+
+            <!-- FAQ question button. -->
+            <button
+              class="faq-button w-full
+                     flex justify-between
+                     px-6 py-5 text-left
+                     font-bold">
+
+              <span>
+                Best place in Gwalior?
+              </span>
+
+              <span class="faq-icon text-brand-red">
+                +
+              </span>
+
+            </button>
+
+            <!-- FAQ answer. -->
+            <div
+              class="faq-answer hidden
+                     px-6 pb-5 leading-7
+                     text-brand-brown/70">
+
+              Shriram Mishtan Bhandar —
+              a local destination for traditional
+              sweets, namkeen, snacks and good food.
+
+            </div>
+
+          </div>
+
+
+          <!-- FAQ item 2. -->
+          <div
+            class="reveal rounded-2xl
+                   border border-brand-gold/20
+                   bg-brand-cream overflow-hidden">
+
+            <!-- FAQ question button. -->
+            <button
+              class="faq-button w-full
+                     flex justify-between
+                     px-6 py-5 text-left
+                     font-bold">
+
+              <span>
+                What are your working hours?
+              </span>
+
+              <span class="faq-icon text-brand-red">
+                +
+              </span>
+
+            </button>
+
+            <!-- FAQ answer. -->
+            <div
+              class="faq-answer hidden
+                     px-6 pb-5 leading-7
+                     text-brand-brown/70">
+
+              We are open from
+              5:00 AM to 10:00 PM.
+
+            </div>
+
+          </div>
+
+
+          <!-- FAQ item 3. -->
+          <div
+            class="reveal rounded-2xl
+                   border border-brand-gold/20
+                   bg-brand-cream overflow-hidden">
+
+            <!-- FAQ question button. -->
+            <button
+              class="faq-button w-full
+                     flex justify-between
+                     px-6 py-5 text-left
+                     font-bold">
+
+              <span>
+                Do you provide home delivery?
+              </span>
+
+              <span class="faq-icon text-brand-red">
+                +
+              </span>
+
+            </button>
+
+            <!-- FAQ answer. -->
+            <div
+              class="faq-answer hidden
+                     px-6 pb-5 leading-7
+                     text-brand-brown/70">
+
+              Yes. Free home delivery is available.
+              Contact us on WhatsApp for ordering
+              and delivery details.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         CONTACT SECTION
+         Purpose:
+         Allows customers to contact the business through WhatsApp.
+         ============================================================ -->
+
+    <section
+      id="contact"
+      class="py-20 royal-pattern">
+
+      <!-- Contact two-column layout. -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+               grid lg:grid-cols-2 gap-10">
+
+
+        <!-- ========================================================
+             CONTACT FORM
+             ======================================================== -->
+
+        <div
+          class="reveal rounded-3xl
+                 bg-white p-6 sm:p-9 shadow-xl">
+
+          <!-- Form heading. -->
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-red">
+
+            Quick Enquiry
+
+          </p>
+
+          <h2
+            class="mt-2 font-display
+                   text-4xl font-bold">
+
+            Send us a WhatsApp message.
+
+          </h2>
+
+          <p
+            class="mt-3 text-sm
+                   text-brand-brown/65">
+
+            Fill in your details and your message
+            will open directly in WhatsApp.
+
+          </p>
+
+
+          <!-- WhatsApp contact form. -->
+          <form
+            id="whatsappForm"
+            class="mt-7 space-y-5">
+
+
+            <!-- Customer name field. -->
+            <div>
+
+              <!-- Name label. -->
+              <label
+                for="customerName"
+                class="block text-sm font-bold">
+
+                Your Name
+
+              </label>
+
+              <!-- Name input. -->
+              <input
+                id="customerName"
+                type="text"
+                value="Raaz"
+                required
+                class="mt-2 w-full rounded-xl
+                       border border-gray-200
+                       bg-brand-cream px-4 py-3
+                       outline-none">
+
+            </div>
+
+
+            <!-- Customer phone field. -->
+            <div>
+
+              <!-- Phone label. -->
+              <label
+                for="customerPhone"
+                class="block text-sm font-bold">
+
+                Phone Number
+
+              </label>
+
+              <!-- Phone input. -->
+              <input
+                id="customerPhone"
+                type="tel"
+                value="9111646245"
+                required
+                class="mt-2 w-full rounded-xl
+                       border border-gray-200
+                       bg-brand-cream px-4 py-3
+                       outline-none">
+
+            </div>
+
+
+            <!-- Customer message field. -->
+            <div>
+
+              <!-- Message label. -->
+              <label
+                for="customerMessage"
+                class="block text-sm font-bold">
+
+                Message
+
+              </label>
+
+              <!-- Message textarea. -->
+              <textarea
+                id="customerMessage"
+                rows="4"
+                required
+                class="mt-2 w-full rounded-xl
+                       border border-gray-200
+                       bg-brand-cream px-4 py-3
+                       outline-none">Welcome</textarea>
+
+            </div>
+
+
+            <!-- Form submit button. -->
+            <button
+              type="submit"
+              class="shine w-full rounded-xl
+                     bg-brand-red px-6 py-4
+                     font-bold text-white
+                     hover:bg-brand-darkRed
+                     transition">
+
+              💬 Send to WhatsApp
+
+            </button>
+
+          </form>
+
+        </div>
+
+
+        <!-- ========================================================
+             BUSINESS CONTACT INFORMATION
+             ======================================================== -->
+
+        <div
+          class="reveal rounded-3xl
+                 bg-brand-red p-6 sm:p-9
+                 text-white shadow-xl">
+
+          <!-- Contact heading. -->
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-lightGold">
+
+            Visit & Contact
+
+          </p>
+
+          <h2
+            class="mt-2 font-display
+                   text-4xl font-bold">
+
+            Come taste the difference.
+
+          </h2>
+
+
+          <!-- Contact details. -->
+          <div class="mt-8 space-y-5">
+
+
+            <!-- Phone information. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <p
+                class="text-xs font-bold uppercase
+                       tracking-widest
+                       text-brand-lightGold">
+
+                Phone
+
+              </p>
+
+              <a
+                href="tel:+919713275089"
+                class="mt-2 block font-semibold">
+
+                9713275089
+
+              </a>
+
+              <a
+                href="tel:+919713275098"
+                class="mt-1 block font-semibold">
+
+                9713275098
+
+              </a>
+
+              <p
+                class="mt-2 text-sm text-white/65">
+
+                Customer Care:
+                9111333081
+
+              </p>
+
+            </div>
+
+
+            <!-- Email information. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <p
+                class="text-xs font-bold uppercase
+                       tracking-widest
+                       text-brand-lightGold">
+
+                Email
+
+              </p>
+
+              <a
+                href="mailto:shrirammisthanbhandar1@gmail.com"
+                class="mt-2 block break-all font-semibold">
+
+                shrirammisthanbhandar1@gmail.com
+
+              </a>
+
+            </div>
+
+
+            <!-- Working hours. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <p
+                class="text-xs font-bold uppercase
+                       tracking-widest
+                       text-brand-lightGold">
+
+                Working Hours
+
+              </p>
+
+              <p class="mt-2 font-semibold">
+                5:00 AM – 10:00 PM
+              </p>
+
+            </div>
+
+
+            <!-- Branch information. -->
+            <div
+              class="rounded-2xl
+                     bg-white/10 p-5">
+
+              <p
+                class="text-xs font-bold uppercase
+                       tracking-widest
+                       text-brand-lightGold">
+
+                Branches
+
+              </p>
+
+              <!-- Branch 1 address. -->
+              <p
+                class="mt-3 text-sm
+                       leading-6 text-white/80">
+
+                <strong>Branch 1:</strong><br>
+
+                Gole Ka Mandir Rd,
+                Mela Ground, Morar,
+                Gwalior, Madhya Pradesh 474005
+
+              </p>
+
+              <!-- Branch 2 address. -->
+              <p
+                class="mt-4 text-sm
+                       leading-6 text-white/80">
+
+                <strong>Branch 2:</strong><br>
+
+                RC Complex,
+                opposite Railway Crossing,
+                near Homeguard Office,
+                Gargaj Colony, Bahodapur,
+                Gurunanak Nagar,
+                Gwalior,
+                Madhya Pradesh 474012
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- Direct WhatsApp button. -->
+          <a
+            href="https://wa.me/919713275098?text=Hello%20Shriram%20Mishtan%20Bhandar%2C%20I%20want%20to%20place%20an%20order."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-7 flex justify-center
+                   rounded-xl bg-brand-gold
+                   px-6 py-4
+                   font-bold text-brand-brown
+                   hover:bg-brand-lightGold
+                   transition">
+
+            Order / Enquire on WhatsApp
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         GOOGLE MAPS SECTION
+         Purpose:
+         Helps customers find the business.
+         ============================================================ -->
+
+    <section
+      class="bg-white py-20">
+
+      <!-- Maps container. -->
+      <div
+        class="max-w-7xl mx-auto
+               px-4 sm:px-6 lg:px-8">
+
+        <!-- Map heading. -->
+        <div class="reveal text-center">
+
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest text-brand-red">
+
+            Find Us
+
+          </p>
+
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Two convenient Gwalior branches.
+
+          </h2>
+
+        </div>
+
+
+        <!-- Google Maps embed.
+             Replace the URL with your exact Google Maps
+             embed URL if required. -->
+
+        <div
+          class="reveal mt-10 overflow-hidden
+                 rounded-3xl shadow-xl">
+
+          <!-- Google Maps iframe. -->
           <iframe
-            title="Shriram Misthan Bhandar - Gwalior"
-            src="https://www.google.com/maps?q=Gole%20Ka%20Mandir%20Road%2C%20Mela%20Ground%2C%20Morar%2C%20Gwalior%2C%20Madhya%20Pradesh%20474005&output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            title="Shriram Mishtan Bhandar Google Maps"
+            src="https://www.google.com/maps?q=Gole+Ka+Mandir+Road,+Mela+Ground,+Morar,+Gwalior,+Madhya+Pradesh+474005&output=embed"
+            class="w-full h-[380px] border-0"
+            loading="lazy">
+          </iframe>
+
         </div>
+
       </div>
+
     </section>
+
+
+    <!-- ============================================================
+         CALL TO ACTION SECTION
+         Purpose:
+         Gives customers a final reason to order.
+         ============================================================ -->
+
+    <section class="bg-brand-cream py-20">
+
+      <!-- CTA card. -->
+      <div
+        class="reveal max-w-6xl mx-auto
+               px-4 sm:px-6 lg:px-8">
+
+        <div
+          class="rounded-3xl bg-brand-red
+                 px-6 py-12 sm:px-12
+                 text-center text-white
+                 shadow-xl">
+
+          <!-- CTA label. -->
+          <p
+            class="text-sm font-bold uppercase
+                   tracking-widest
+                   text-brand-lightGold">
+
+            Make it sweeter
+
+          </p>
+
+          <!-- CTA heading. -->
+          <h2
+            class="mt-3 font-display
+                   text-4xl sm:text-5xl
+                   font-bold">
+
+            Ready for your next mithai box?
+
+          </h2>
+
+          <!-- CTA description. -->
+          <p
+            class="mx-auto mt-4 max-w-2xl
+                   text-white/75">
+
+            Call us, visit a branch or send
+            your order directly on WhatsApp.
+
+          </p>
+
+
+          <!-- CTA buttons. -->
+          <div
+            class="mt-8 flex flex-wrap
+                   justify-center gap-3">
+
+            <!-- WhatsApp CTA button. -->
+            <a
+              href="https://wa.me/919713275098?text=Hello%20Shriram%20Mishtan%20Bhandar%2C%20I%20want%20to%20order%20mithai."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full bg-brand-gold
+                     px-7 py-4
+                     font-bold text-brand-brown
+                     hover:bg-brand-lightGold
+                     transition">
+
+              WhatsApp Us
+
+            </a>
+
+            <!-- Call CTA button. -->
+            <a
+              href="tel:+919713275089"
+              class="rounded-full
+                     border border-white/30
+                     px-7 py-4
+                     font-bold
+                     hover:bg-white/10
+                     transition">
+
+              Call 9713275089
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <div><strong>Shriram Misthan Bhandar</strong><p>Fresh sweets & delicious moments.</p></div>
-      <div class="footer-links"><a href="tel:+919713275098">Call</a><a href="https://wa.me/919713275098" target="_blank" rel="noopener">WhatsApp</a><a href="#products">Products</a></div>
+
+  <!-- ============================================================
+       FOOTER SECTION
+       Purpose:
+       Displays brand information, links, contact details and
+       social media links.
+       ============================================================ -->
+
+  <footer
+    class="bg-brand-brown text-white">
+
+    <!-- Footer content. -->
+    <div
+      class="max-w-7xl mx-auto
+             px-4 sm:px-6 lg:px-8
+             py-14">
+
+      <!-- Footer columns. -->
+      <div
+        class="grid md:grid-cols-3 gap-10">
+
+
+        <!-- ========================================================
+             FOOTER BRAND
+             ======================================================== -->
+
+        <div>
+
+          <!-- Footer logo:
+               Represents the business brand.
+               Replace this URL with your real logo if required. -->
+
+          <img
+            src="https://dummyimage.com/120x120/ffffff/8f1027.png&text=SMB"
+            alt="Shriram Mishtan Bhandar logo"
+            class="h-20 w-20 object-contain rounded-full">
+
+          <!-- Footer business name. -->
+          <h2
+            class="mt-4 font-display
+                   text-2xl font-bold">
+
+            Shriram Mishtan Bhandar
+
+          </h2>
+
+          <!-- Tagline. -->
+          <p
+            class="mt-2 text-sm text-white/60">
+
+            Happiness in every box.
+
+          </p>
+
+        </div>
+
+
+        <!-- ========================================================
+             FOOTER QUICK LINKS
+             ======================================================== -->
+
+        <div>
+
+          <h3
+            class="font-bold text-brand-lightGold">
+
+            Quick Links
+
+          </h3>
+
+          <!-- Footer navigation links. -->
+          <div
+            class="mt-4 grid gap-2
+                   text-sm text-white/65">
+
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#menu">Menu</a>
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             FOOTER CONTACT & SOCIAL LINKS
+             ======================================================== -->
+
+        <div>
+
+          <h3
+            class="font-bold text-brand-lightGold">
+
+            Connect With Us
+
+          </h3>
+
+          <!-- Phone link. -->
+          <a
+            href="tel:+919713275089"
+            class="mt-4 block text-sm
+                   text-white/65">
+
+            📞 9713275089
+
+          </a>
+
+          <!-- WhatsApp link. -->
+          <a
+            href="https://wa.me/919713275098"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-2 block text-sm
+                   text-white/65">
+
+            💬 WhatsApp:
+            9713275098
+
+          </a>
+
+          <!-- Email link. -->
+          <a
+            href="mailto:shrirammisthanbhandar1@gmail.com"
+            class="mt-2 block break-all
+                   text-sm text-white/65">
+
+            ✉️ shrirammisthanbhandar1@gmail.com
+
+          </a>
+
+
+          <!-- ======================================================
+               SOCIAL MEDIA LINKS
+               Replace # with your YouTube, LinkedIn and X URLs.
+               ====================================================== -->
+
+          <div class="mt-6 flex flex-wrap gap-2">
+
+            <!-- Facebook link. -->
+            <a
+              href="https://www.facebook.com/profile.php?id=61593543002280"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full border
+                     border-white/15 px-4 py-2
+                     text-xs font-bold">
+
+              Facebook
+
+            </a>
+
+            <!-- Instagram link. -->
+            <a
+              href="https://www.instagram.com/shrirammisthanbhandar1?stkn=aG93M3R3MWNwbDA2"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full border
+                     border-white/15 px-4 py-2
+                     text-xs font-bold">
+
+              Instagram
+
+            </a>
+
+            <!-- YouTube link placeholder. -->
+            <a
+              href="#"
+              onclick="return false;"
+              class="rounded-full border
+                     border-white/15 px-4 py-2
+                     text-xs font-bold">
+
+              YouTube
+
+            </a>
+
+            <!-- LinkedIn link placeholder. -->
+            <a
+              href="#"
+              onclick="return false;"
+              class="rounded-full border
+                     border-white/15 px-4 py-2
+                     text-xs font-bold">
+
+              LinkedIn
+
+            </a>
+
+            <!-- X/Twitter link placeholder. -->
+            <a
+              href="#"
+              onclick="return false;"
+              class="rounded-full border
+                     border-white/15 px-4 py-2
+                     text-xs font-bold">
+
+              X
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Footer decorative line. -->
+      <div class="gold-line mt-10 opacity-50"></div>
+
+
+      <!-- Copyright information. -->
+      <div
+        class="mt-6 flex flex-col sm:flex-row
+               justify-between gap-3
+               text-xs text-white/50">
+
+        <p>
+          © <span id="currentYear"></span>
+          Shriram Mishtan Bhandar.
+          All rights reserved.
+        </p>
+
+        <p>
+          Customer Care: 9111333081
+          • Open 5 AM – 10 PM
+        </p>
+
+      </div>
+
     </div>
-    <div class="container copyright">© <span id="year"></span> Shriram Misthan Bhandar. All rights reserved.</div>
+
   </footer>
 
-  <script src="script.js"></script>
+
+  <!-- ============================================================
+       FLOATING WHATSAPP BUTTON
+       Purpose:
+       Keeps WhatsApp ordering available while visitors scroll.
+       ============================================================ -->
+
+  <a
+    href="https://wa.me/919713275098?text=Hello%20Shriram%20Mishtan%20Bhandar%2C%20I%20want%20to%20place%20an%20order."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Shriram Mishtan Bhandar on WhatsApp"
+    class="fixed bottom-5 right-5 z-40
+           h-14 w-14 grid place-items-center
+           rounded-full bg-brand-red
+           text-2xl text-white shadow-2xl
+           hover:scale-110 transition">
+
+    💬
+
+  </a>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       Purpose:
+       Controls mobile navigation, WhatsApp form, FAQ accordion,
+       scroll animations and counters.
+       ============================================================ -->
+
+  <script>
+
+    // ============================================================
+    // MOBILE MENU TOGGLE
+    // Opens and closes the navigation menu on mobile screens.
+    // ============================================================
+
+    const mobileMenuButton =
+      document.getElementById("mobileMenuButton");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+
+    mobileMenuButton.addEventListener("click", function () {
+
+      // Show or hide the mobile menu.
+      mobileMenu.classList.toggle("hidden");
+
+    });
+
+
+    // ============================================================
+    // MOBILE MENU CLOSE
+    // Closes the mobile menu after a navigation link is clicked.
+    // ============================================================
+
+    const mobileLinks =
+      mobileMenu.querySelectorAll("a");
+
+    mobileLinks.forEach(function (link) {
+
+      link.addEventListener("click", function () {
+
+        mobileMenu.classList.add("hidden");
+
+      });
+
+    });
+
+
+    // ============================================================
+    // WHATSAPP FORM SUBMISSION
+    // Takes the customer's details and opens WhatsApp with a
+    // pre-filled message.
+    // ============================================================
+
+    const whatsappForm =
+      document.getElementById("whatsappForm");
+
+
+    whatsappForm.addEventListener("submit", function (event) {
+
+      // Prevent the browser from refreshing the page.
+      event.preventDefault();
+
+
+      // Get customer name.
+      const customerName =
+        document.getElementById("customerName").value;
+
+
+      // Get customer phone number.
+      const customerPhone =
+        document.getElementById("customerPhone").value;
+
+
+      // Get customer message.
+      const customerMessage =
+        document.getElementById("customerMessage").value;
+
+
+      // Business WhatsApp number.
+      const businessWhatsAppNumber =
+        "919713275098";
+
+
+      // Create WhatsApp message.
+      const message =
+        "Hello Shriram Mishtan Bhandar!%0A%0A" +
+        "Name: " +
+        encodeURIComponent(customerName) +
+        "%0A" +
+        "Phone: " +
+        encodeURIComponent(customerPhone) +
+        "%0A" +
+        "Message: " +
+        encodeURIComponent(customerMessage);
+
+
+      // Open WhatsApp in a new browser tab.
+      window.open(
+        "https://wa.me/" +
+        businessWhatsAppNumber +
+        "?text=" +
+        message,
+        "_blank"
+      );
+
+    });
+
+
+    // ============================================================
+    // FAQ ACCORDION
+    // Opens and closes FAQ answers when questions are clicked.
+    // ============================================================
+
+    const faqButtons =
+      document.querySelectorAll(".faq-button");
+
+
+    faqButtons.forEach(function (button) {
+
+      button.addEventListener("click", function () {
+
+        // Find the answer belonging to this question.
+        const answer =
+          button.nextElementSibling;
+
+
+        // Find the + / - icon.
+        const icon =
+          button.querySelector(".faq-icon");
+
+
+        // Open or close the answer.
+        answer.classList.toggle("hidden");
+
+
+        // Change icon between + and -.
+        if (answer.classList.contains("hidden")) {
+
+          icon.textContent = "+";
+
+        } else {
+
+          icon.textContent = "−";
+
+        }
+
+      });
+
+    });
+
+
+    // ============================================================
+    // SCROLL REVEAL ANIMATION
+    // Makes website elements appear smoothly while scrolling.
+    // ============================================================
+
+    function revealOnScroll() {
+
+      // Find all elements with reveal class.
+      const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+      revealElements.forEach(function (element) {
+
+        // Find distance from top of browser window.
+        const elementPosition =
+          element.getBoundingClientRect().top;
+
+
+        // Check if element has entered the visible area.
+        if (elementPosition < window.innerHeight - 80) {
+
+          element.classList.add("show");
+
+        }
+
+      });
+
+    }
+
+
+    // Run reveal animation while scrolling.
+    window.addEventListener(
+      "scroll",
+      revealOnScroll
+    );
+
+
+    // Run reveal animation when page loads.
+    window.addEventListener(
+      "load",
+      revealOnScroll
+    );
+
+
+    // ============================================================
+    // ANIMATED COUNTERS
+    // Animates the statistics numbers when they become visible.
+    // ============================================================
+
+    function animateCounters() {
+
+      // Find all counter elements.
+      const counters =
+        document.querySelectorAll(".counter");
+
+
+      counters.forEach(function (counter) {
+
+        // Prevent the same counter from animating twice.
+        if (counter.dataset.animated === "true") {
+          return;
+        }
+
+
+        // Check whether counter is visible.
+        const position =
+          counter.getBoundingClientRect().top;
+
+
+        if (position < window.innerHeight - 80) {
+
+          // Mark counter as animated.
+          counter.dataset.animated = "true";
+
+
+          // Get final number from data-target.
+          const target =
+            Number(counter.dataset.target);
+
+
+          // Start number.
+          let current = 0;
+
+
+          // Counter animation speed.
+          const speed =
+            Math.max(
+              10,
+              Math.floor(1200 / target)
+            );
+
+
+          // Increase number gradually.
+          const timer =
+            setInterval(function () {
+
+              current++;
+
+              counter.textContent =
+                current;
+
+
+              // Stop when target is reached.
+              if (current >= target) {
+
+                clearInterval(timer);
+
+              }
+
+            }, speed);
+
+        }
+
+      });
+
+    }
+
+
+    // Run counters while scrolling.
+    window.addEventListener(
+      "scroll",
+      animateCounters
+    );
+
+
+    // Run counters on initial page load.
+    window.addEventListener(
+      "load",
+      animateCounters
+    );
+
+
+    // ============================================================
+    // CURRENT YEAR
+    // Automatically updates the copyright year.
+    // ============================================================
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+  </script>
+
 </body>
 </html>
